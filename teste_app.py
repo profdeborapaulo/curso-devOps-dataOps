@@ -1,3 +1,3 @@
 import app
 def test_saudacao():
-    assert app.saudacao("Mundo") == "Olá, Mundo!"
+    assert app.saudacao("Mundo") == "Olá, Mundo! Cheguei"
