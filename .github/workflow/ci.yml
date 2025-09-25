@@ -1,0 +1,37 @@
+name: Pipeline CI/CD
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest
+
+    - name: Run tests
+      run: |
+        pytest teste_app.py
+
+    - name: Simular deploy
+      if: success()
+      run: echo "Deploy realizado com sucesso!"
+      # Aqui você pode adicionar comandos reais de deploy, como copiar arquivos para um servidor, etc.
